@@ -8,6 +8,7 @@ From: ubuntu:18.04
 
     export DEBIAN_FRONTEND=noninteractive
 
+    # install basics
     apt-get update \
         && apt-get upgrade -y \
         && apt-get install -y \
@@ -16,6 +17,7 @@ From: ubuntu:18.04
         python3 \
         python3-pip
 
+    # install apt packages
     add-apt-repository ppa:marutter/c2d4u3.5
     add-apt-repository ppa:marutter/rrutter3.5
 
@@ -26,3 +28,18 @@ From: ubuntu:18.04
         cufflinks \
         r-base-core r-base-dev \
         rna-star
+
+    # install python3 packages
+    pip3 install \
+        cutadapt \
+        HTSeq \
+        snakemake
+
+    # install R packages
+    apt-get install -y \
+        r-bioc-deseq2 \
+        r-bioc-genomicranges \
+        r-bioc-rtracklayer
+
+    Rscript -e "source('https://bioconductor.org/biocLite.R') ; \
+        biocLite(c('data.table', 'valr'), type='source', ask=FALSE)"

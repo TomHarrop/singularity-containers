@@ -16,7 +16,8 @@ From: ubuntu:18.04
         git \
         software-properties-common \
         python3 \
-        python3-pip
+        python3-pip \
+        wget
 
     # install apt packages
     add-apt-repository ppa:marutter/c2d4u3.5
@@ -44,7 +45,7 @@ From: ubuntu:18.04
 
 
     Rscript -e "source('https://bioconductor.org/biocLite.R') ; \
-        biocLite(c('data.table', 'mfuzz', 'tidyverse', 'valr'), type='source', ask=FALSE)"
+        biocLite(c('data.table', 'Mfuzz', 'valr'), type='source', ask=FALSE)"
 
     # install wgsim
     git clone https://github.com/lh3/wgsim.git

@@ -47,9 +47,11 @@ From: ubuntu:18.04
 #        r-bioc-genomicranges \
 #        r-bioc-rtracklayer 
 
+deseq2', 'genomicranges
+
     Rscript -e "source('https://bioconductor.org/biocLite.R') ; \
         biocLite(type='source', ask=FALSE) ; \
-        biocLite(c('data.table', 'deseq2', 'genomicranges', 'Mfuzz', 'rtracklayer', 'tidyverse', 'valr'), type='source', ask=FALSE)"
+        biocLite(c('data.table', 'DESeq2', 'GenomicRanges', 'Mfuzz', 'rtracklayer', 'tidyverse', 'valr'), type='source', ask=FALSE)"
 
     # install wgsim
     git clone https://github.com/lh3/wgsim.git

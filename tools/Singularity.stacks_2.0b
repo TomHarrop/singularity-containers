@@ -33,7 +33,7 @@ From: ubuntu:18.04
         --strip-components 1
     cd stacks-install || exit 1
     ./configure \
-    && make -j \
+    && make \
     && make install
     cd ~ || exit 1
     rm -rf stacks-install stacks.tar.gz

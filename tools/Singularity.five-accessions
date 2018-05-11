@@ -8,29 +8,23 @@ From: ubuntu:18.04
 
     export DEBIAN_FRONTEND=noninteractive
 
-    # install basics
+    # install apt packages
     apt-get update \
         && apt-get upgrade -y \
         && apt-get install -y \
+        bedtools \
         build-essential \
+        cufflinks \
         git \
         language-pack-en \
+        libcurl4-openssl-dev \
+        libssl-dev \
+        libxml2-dev \
         python3 \
         python3-pip \
+        rna-star \
         software-properties-common \
         wget
-
-    # install apt packages
-    add-apt-repository ppa:marutter/c2d4u3.5
-    add-apt-repository ppa:marutter/rrutter3.5
-
-    apt-get update
-
-    apt-get install -y \
-        bedtools \
-        cufflinks \
-        r-base-core r-base-dev \
-        rna-star
 
     # install python3 packages
     pip3 install \
@@ -38,11 +32,12 @@ From: ubuntu:18.04
         HTSeq \
         snakemake
 
-    # install R packages
+    # install R & packages
+    add-apt-repository ppa:marutter/c2d4u
+    add-apt-repository ppa:marutter/rrutter
+    apt-get update
     apt-get install -y \
-        libxml2-dev \
-        libcurl4-openssl-dev \
-        libssl-dev 
+        r-base-core r-base-dev
 
     Rscript -e "source('https://bioconductor.org/biocLite.R') ; \
         biocLite(type='source', ask=FALSE) ; \

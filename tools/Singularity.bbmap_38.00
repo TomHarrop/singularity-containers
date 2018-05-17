@@ -1,9 +1,6 @@
 Bootstrap: docker
 From: debian:stretch
 
-%runscript
-
-
 %post
 
     export DEBIAN_FRONTEND=noninteractive

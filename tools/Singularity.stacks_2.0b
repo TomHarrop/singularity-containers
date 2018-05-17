@@ -3,12 +3,12 @@ OSVersion: bionic
 MirrorURL: http://archive.ubuntu.com/ubuntu/
 Include: build-essential language-pack-en wget zlib1g-dev
 
-% help
+%help
 
     Container for stacks 2.0b
     http://catchenlab.life.illinois.edu/stacks
 
-% labels
+%labels
 
     MAINTAINER "Tom Harrop"
     VERSION "stacks 2.0b"

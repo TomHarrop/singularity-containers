@@ -1,5 +1,7 @@
-Bootstrap: docker
-From: ubuntu:18.04
+Bootstrap: debootstrap
+OSVersion: bionic
+MirrorURL: http://archive.ubuntu.com/ubuntu/
+Include: build-essential language-pack-en wget zlib1g-dev
 
 % help
 
@@ -12,17 +14,6 @@ From: ubuntu:18.04
     VERSION "stacks 2.0b"
 
 %post
-
-    export DEBIAN_FRONTEND=noninteractive
-
-    # install apt packages
-    apt-get update \
-        && apt-get upgrade -y \
-        && apt-get install -y \
-        build-essential \
-        language-pack-en \
-        wget \
-        zlib1g-dev
 
     # install stacks
     wget -O "stacks.tar.gz" \

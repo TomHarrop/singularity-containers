@@ -1,17 +1,9 @@
 Bootstrap: debootstrap
-OSVersion: stretch
-MirrorURL:  https://deb.debian.org/debian
+OSVersion: latest
+MirrorURL: https://deb.debian.org/debian
 Include: default-jre wget
 
 %post
-
-    export DEBIAN_FRONTEND=noninteractive
-
-    # install apt packages
-#    apt-get update -y --fix-missing
-#    apt-get install -y \
-#        default-jre \
-#        wget
 
     wget -O "bbmap.tar.gz" \
         "https://sourceforge.net/projects/bbmap/files/BBMap_38.00.tar.gz"

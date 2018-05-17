@@ -9,11 +9,11 @@ From: ubuntu:18.04
     export DEBIAN_FRONTEND=noninteractive
 
     # install apt packages
-    apt-get update \
-        && apt-get install -y \
-        build-essential \
+    apt-get update -y --fix-missing
+    apt-get install -y \
+        default-jre \
         default-jdk \
-        language-pack-en \
+        tar \
         wget
 
     wget -O "bbmap.tar.gz" \
@@ -22,6 +22,6 @@ From: ubuntu:18.04
     tar -zxf bbmap.tar.gz \
         -C bbmap-install \
         --strip-components 1
-    mv bbmap-install/resources/* /
-    mv bbmap-install/* /usr/local/bin/
+    cp -r bbmap-install/resources/* /
+    cp -r bbmap-install/* /usr/local/bin/
     rm -rf bbmap.tar.gz bbmap-install

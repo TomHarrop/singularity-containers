@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: ubuntu:18.04
+From: debian:stretch
 
 %runscript
 
@@ -12,8 +12,6 @@ From: ubuntu:18.04
     apt-get update -y --fix-missing
     apt-get install -y \
         default-jre \
-        default-jdk \
-        tar \
         wget
 
     wget -O "bbmap.tar.gz" \

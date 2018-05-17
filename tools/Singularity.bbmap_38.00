@@ -1,0 +1,27 @@
+Bootstrap: docker
+From: ubuntu:18.04
+
+%runscript
+
+
+%post
+
+    export DEBIAN_FRONTEND=noninteractive
+
+    # install apt packages
+    apt-get update \
+        && apt-get install -y \
+        build-essential \
+        default-jdk \
+        language-pack-en \
+        wget
+
+    wget -O "bbmap.tar.gz" \
+        "https://sourceforge.net/projects/bbmap/files/BBMap_38.00.tar.gz"
+    mkdir bbmap-install
+    tar -zxf bbmap.tar.gz \
+        -C bbmap-install \
+        --strip-components 1
+    mv bbmap-install/resources/* /
+    mv bbmap-install/* /usr/local/bin/
+    rm -rf bbmap.tar.gz bbmap-install

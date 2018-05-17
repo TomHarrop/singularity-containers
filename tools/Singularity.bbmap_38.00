@@ -1,5 +1,5 @@
 Bootstrap: debootstrap
-OSVersion: latest
+OSVersion: stable
 MirrorURL: https://deb.debian.org/debian
 Include: default-jre wget
 

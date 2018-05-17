@@ -1,0 +1,18 @@
+Bootstrap: docker
+From: rocker/verse:latest
+
+%help
+
+    Container for plotting with R data.table and ggplot2
+
+%labels
+
+    MAINTAINER "Tom Harrop"
+    VERSION "R 3.5"
+
+%post
+
+    # install packages from bioconductor
+    Rscript -e "source('https://bioconductor.org/biocLite.R') ; \
+        biocLite(c('data.table'), \
+            type='source', ask=FALSE)"

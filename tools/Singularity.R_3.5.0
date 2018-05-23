@@ -8,7 +8,7 @@ From: rocker/verse:latest
 %labels
 
     MAINTAINER "Tom Harrop"
-    VERSION "R 3.5"
+    VERSION "R 3.5.0"
 
 %post
 

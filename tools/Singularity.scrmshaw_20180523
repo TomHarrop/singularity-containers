@@ -1,0 +1,35 @@
+Bootstrap: docker
+From: bioperl/bioperl:latest
+
+%post
+
+    export DEBIAN_FRONTEND=noninteractive
+
+    # install apt packages
+    apt-get update \
+        && apt-get install -y \
+        language-pack-en \
+        wget
+
+    # download scrmshaw
+    wget -O "scrmshaw.tar.gz" \
+        http://halfonlab.ccr.buffalo.edu/scrmshaw/SCRMshaw-05142018.tar.gz
+    mkdir scrmshaw
+    tar -zxf scrmshaw.tar.gz \
+        -C scrmshaw \
+        --strip-components 1
+
+    # fix the weird path in Makefile
+    cd scrmshaw || exit 1
+    sed -i '/OBJ = .obj/c\OBJ = ./src/hexmcd/.obj' Makefile 
+
+    # build
+    make
+
+    # tidy up
+    cd .. || exit 1
+    rm scrmshaw.tar.gz
+
+%environment
+
+    PATH="/scrmshaw/code:/scrmshaw/bin:${PATH}"

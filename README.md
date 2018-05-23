@@ -9,5 +9,7 @@
 
 ## Tools
 
+- [BBMap 38.00](https://jgi.doe.gov/data-and-tools/bbtools/)
+- [SCRMshaw 05142018](http://halfonlab.ccr.buffalo.edu/scrmshaw.html)
 - [Stacks 2.0b](http://catchenlab.life.illinois.edu/stacks/)
 

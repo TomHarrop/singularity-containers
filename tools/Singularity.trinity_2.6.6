@@ -1,0 +1,21 @@
+Bootstrap: docker
+From: trinityrnaseq/trinityrnaseq:2.6.6
+
+%help
+
+    Container for Trinity 2.6.6
+    https://github.com/trinityrnaseq/trinityrnaseq/releases
+
+%labels
+
+    VERSION "Trinity 2.6.6"
+
+%post
+    
+    apt-get update \
+        && apt-get install -y \
+        language-pack-en
+
+%runscript
+
+    exec /usr/local/bin/trinityrnaseq/Trinity "$@"

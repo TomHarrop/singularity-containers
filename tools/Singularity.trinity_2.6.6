@@ -16,6 +16,18 @@ From: trinityrnaseq/trinityrnaseq:2.6.6
         && apt-get install -y \
         language-pack-en
 
+    # install RSEM
+    mkdir rsem-install
+    wget -O "rsem.tar.gz" \
+        https://github.com/deweylab/RSEM/archive/v1.3.0.tar.gz
+    tar -zxf rsem.tar.gz \
+        -C rsem-install \
+        --strip-components 1
+    cd rsem-install
+    make && make install
+    cd ..
+    rm -rf rsem.tar.gz rsem-install
+
 %environment
 
     PATH="${PATH}:/usr/local/bin/trinityrnaseq/util:/usr/local/bin/trinityrnaseq/util/support_scripts"

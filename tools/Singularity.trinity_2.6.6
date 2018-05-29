@@ -16,6 +16,10 @@ From: trinityrnaseq/trinityrnaseq:2.6.6
         && apt-get install -y \
         language-pack-en
 
+%environment
+
+    PATH="${PATH}:/usr/local/bin/trinityrnaseq/util:/usr/local/bin/trinityrnaseq/util/support_scripts"
+
 %runscript
 
     exec /usr/local/bin/trinityrnaseq/Trinity "$@"

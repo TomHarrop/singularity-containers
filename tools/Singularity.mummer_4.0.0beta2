@@ -1,7 +1,7 @@
 Bootstrap: debootstrap
 OSVersion: bionic
 MirrorURL: http://archive.ubuntu.com/ubuntu/
-Include: build-essential  language-pack-en software-properties-common wget
+Include: build-essential language-pack-en software-properties-common wget
 
 %help
 
@@ -12,7 +12,6 @@ Include: build-essential  language-pack-en software-properties-common wget
 
     MAINTAINER "Tom Harrop"
     VERSION "mummer 4.0.0beta2"
-
 
 %runscript
 
@@ -48,6 +47,3 @@ Include: build-essential  language-pack-en software-properties-common wget
 
     # rebuild libraries
     ldconfig
-
-    # print help to build log
-    mummer -h

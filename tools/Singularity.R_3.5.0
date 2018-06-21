@@ -14,5 +14,15 @@ From: rocker/verse:latest
 
     # install packages from bioconductor
     Rscript -e "source('https://bioconductor.org/biocLite.R') ; \
-        biocLite(c('data.table', 'ggimage', 'ggtree', 'sysfonts'), \
+        biocLite(c('data.table', 'extrafont', 'ggimage', 'ggtree', 'sysfonts'), \
             type='source', ask=FALSE)"
+
+    # install lato
+    wget -O "lato.zip" \
+        http://www.latofonts.com/download/Lato2OFL.zip
+    unzip lato.zip
+    mv Lato2OFL /usr/share/fonts/truetype/
+    fc-cache -f -v
+    Rscript -e "library('extrafont') ; \
+        font_import(prompt=FALSE) ; \
+        loadfonts()"

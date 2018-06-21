@@ -14,7 +14,7 @@ From: rocker/verse:latest
 
     # install packages from bioconductor
     Rscript -e "source('https://bioconductor.org/biocLite.R') ; \
-        biocLite(c('data.table', 'extrafont', 'ggimage', 'ggtree', 'sysfonts'), \
+        biocLite(c('Cairo', 'data.table', 'extrafont', 'ggimage', 'ggtree', 'sysfonts'), \
             type='source', ask=FALSE)"
 
     # install lato
@@ -22,6 +22,7 @@ From: rocker/verse:latest
         http://www.latofonts.com/download/Lato2OFL.zip
     unzip lato.zip
     mv Lato2OFL /usr/share/fonts/truetype/
+    rm lato.zip
     fc-cache -f -v
     Rscript -e "library('extrafont') ; \
         font_import(prompt=FALSE) ; \

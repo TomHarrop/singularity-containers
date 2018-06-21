@@ -14,5 +14,5 @@ From: rocker/verse:latest
 
     # install packages from bioconductor
     Rscript -e "source('https://bioconductor.org/biocLite.R') ; \
-        biocLite(c('data.table'), \
+        biocLite(c('data.table', 'ggimage', 'ggtree', 'sysfonts'), \
             type='source', ask=FALSE)"

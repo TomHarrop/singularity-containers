@@ -1,0 +1,53 @@
+Bootstrap: docker
+From: rocker/verse:latest
+
+%help
+
+    Shiny-server for shinotate 
+
+%labels
+
+    MAINTAINER "Tom Harrop twharrop@gmail.com"
+    VERSION "Shiny Server v1.5.8.918"
+
+%post
+
+    # install apt packages
+    apt-get update \
+        && apt-get install -y \
+        gdebi-core \
+        pandoc \
+        pandoc-citeproc
+
+    # install latest shiny server from rstudio.org
+    wget --no-verbose \
+        https://download3.rstudio.org/ubuntu-14.04/x86_64/VERSION \
+        -O "version.txt"
+    VERSION=$(cat version.txt)
+    wget --no-verbose \
+        "https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-$VERSION-amd64.deb" \
+        -O ss-latest.deb
+    gdebi -n ss-latest.deb
+    rm -f version.txt ss-latest.deb
+
+    # install packages from bioconductor
+    Rscript -e "source('https://bioconductor.org/biocLite.R') ; \
+        biocLite(c('shiny',\
+            'shinydashboard', \
+            'shinyWidgets', \
+            'rmarkdown', \
+            'R.utils', \
+            'sqldf', \
+            'doFuture', \
+            'MonetDBLite', \
+            'Cairo'), \
+        type='source', ask=FALSE)"
+
+        # set shiny permissions
+        # adduser --disabled-password --gecos "" --ingroup shiny docker
+        usermod -a -G shiny rstudio
+        mkdir -p /var/log/shiny-server
+        chown shiny.shiny /var/log/shiny-server
+
+%runscript
+    exec shiny-server 2>&1

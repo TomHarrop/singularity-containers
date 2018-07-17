@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: rocker/verse:latest
+From: rocker/shiny:latest
 
 %help
 
@@ -11,43 +11,51 @@ From: rocker/verse:latest
     VERSION "Shiny Server v1.5.8.918"
 
 %post
-
     # install apt packages
     apt-get update \
         && apt-get install -y \
-        gdebi-core \
-        pandoc \
-        pandoc-citeproc
-
-    # install latest shiny server from rstudio.org
-    wget --no-verbose \
-        https://download3.rstudio.org/ubuntu-14.04/x86_64/VERSION \
-        -O "version.txt"
-    VERSION=$(cat version.txt)
-    wget --no-verbose \
-        "https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-$VERSION-amd64.deb" \
-        -O ss-latest.deb
-    gdebi -n ss-latest.deb
-    rm -f version.txt ss-latest.deb
+        git \
+        libssl-dev \
+        libxml2-dev
 
     # install packages from bioconductor
-    Rscript -e "source('https://bioconductor.org/biocLite.R') ; \
-        biocLite(c('shiny',\
+    Rscript -e "install.packages('BiocManager')"
+    ###DISABLE BEFORE PUSH###
+    Rscript -e "options(Ncpus=8); \
+            BiocManager::install(c( \
+            'Biostrings', \
+            'Cairo', \
+            'dbplyr', \
+            'DESeq2', \
+            'devtools', \
+            'doFuture', \
+            'dplyr', \
+            'DT', \
+            'ggplot2', \
+            'MonetDBLite', \
+            'pacman', \
+            'plotly', \
+            'purrr', \
+            'R.utils', \
+            'RColorBrewer', \
+            'RSQLite', \
             'shinydashboard', \
             'shinyWidgets', \
-            'rmarkdown', \
-            'R.utils', \
             'sqldf', \
-            'doFuture', \
-            'MonetDBLite', \
-            'Cairo'), \
+            'tidyverse' \
+            ), \
         type='source', ask=FALSE)"
 
-        # set shiny permissions
-        # adduser --disabled-password --gecos "" --ingroup shiny docker
-        usermod -a -G shiny rstudio
-        mkdir -p /var/log/shiny-server
-        chown shiny.shiny /var/log/shiny-server
+    # set shiny permissions
+    mkdir -p /var/log/shiny-server
+    chown shiny.shiny /var/log/shiny-server
+
+    # install shinotate
+    git clone https://github.com/IdoBar/shiny-server.git
+    cd shiny-server || exit 1
+    cp -r shinotate /srv/shiny-server/
+    cd .. || exit 1
+    rm -rf shiny-server
 
 %runscript
     exec shiny-server 2>&1

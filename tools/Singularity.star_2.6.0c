@@ -21,6 +21,7 @@ Include: build-essential wget zlib1g-dev
 
     # install STAR
     wget -O "star.tar.gz" \
+        --no-check-certificate \
         https://github.com/alexdobin/STAR/archive/2.6.0c.tar.gz
     mkdir star
     tar -zxf star.tar.gz \

@@ -1,0 +1,25 @@
+Bootstrap: docker
+From: bioconductor/release_core2:R3.5.0_Bioc3.7
+
+%help
+
+    R 3.5.0 with Bioconductor 3.7 and DESeq2_1.20.0
+    
+%labels
+
+    MAINTAINER "Tom Harrop (twharrop@gmail.com)"
+    VERSION "Bioconductor 3.7"
+
+%post
+    # install packages from bioconductor
+    Rscript -e "options(Ncpus=8); \
+        BiocInstaller::biocLite(c( \
+            'DESeq2', \
+            'systemPipeR', \
+            'valr' \
+            ), \
+        type='source', ask=FALSE)"
+
+%runscript
+
+    exec /usr/local/bin/R "$@"

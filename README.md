@@ -10,6 +10,7 @@
 ## Tools
 
 - [BBMap 38.00](https://jgi.doe.gov/data-and-tools/bbtools/)
+- [Bioconductor 3.7](https://bioconductor.org/help/docker/)
 - [Biopython 1.72](https://biopython.org/)
 - [BUSCO 3.0.2](http://busco.ezlab.org/)
 - [mummer 4.0.0beta2](https://mummer4.github.io/)

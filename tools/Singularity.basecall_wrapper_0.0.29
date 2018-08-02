@@ -3,11 +3,11 @@ From: rocker/tidyverse:3.5.1
 
 %help
 
-    Python 3.5.3 with albacore 2.3.1 and basecall_wrapper 0.0.29
+    basecall_wrapper 0.0.29 with Python 3.5.3 and albacore 2.3.1
     
 %labels
 
-    MAINTAINER "Tom Harrop (twharrop@gmail.com)"
+    MAINTAINER "Tom Harrop (twharrop@gmail.com) "
     VERSION "basecall_wrapper 0.0.29 with albacore 2.3.1"
 
 %runscript
@@ -51,8 +51,8 @@ From: rocker/tidyverse:3.5.1
 
     # lanfear QC script
     Rscript -e "install.packages(c( \
-    'futile.logger', \
-    'optparse'))"
+        'futile.logger', \
+        'optparse'))"
 
     wget \
         -O /usr/local/bin/MinIONQC.R \

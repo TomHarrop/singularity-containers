@@ -12,6 +12,7 @@
 - [BBMap 38.00](https://jgi.doe.gov/data-and-tools/bbtools/)
 - [Bioconductor 3.7](https://bioconductor.org/help/docker/)
 - [Biopython 1.72](https://biopython.org/)
+- [borgbackup 1.1.6](https://github.com/borgbackup/borg)
 - [BUSCO 3.0.2](http://busco.ezlab.org/)
 - [minimap2 2.11 r797](https://github.com/lh3/minimap2)
 - [mummer 4.0.0beta2](https://mummer4.github.io/)

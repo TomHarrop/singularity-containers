@@ -21,4 +21,3 @@
 - [Salmon 0.11.1](https://github.com/COMBINE-lab/salmon/releases)
 - [Stacks 2.0b](http://catchenlab.life.illinois.edu/stacks/)
 - [Trinity 2.6.6](https://github.com/trinityrnaseq/trinityrnaseq)
-

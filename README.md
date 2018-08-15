@@ -14,6 +14,7 @@
 - [Biopython 1.72](https://biopython.org/)
 - [borgbackup 1.1.6](https://github.com/borgbackup/borg)
 - [BUSCO 3.0.2](http://busco.ezlab.org/)
+- [meraculous 2.2.6](https://jgi.doe.gov/data-and-tools/meraculous/)
 - [minimap2 2.11 r797](https://github.com/lh3/minimap2)
 - [mummer 4.0.0beta2](https://mummer4.github.io/)
 - [R 3.5.0](http://r-project.org/)

@@ -1,14 +1,14 @@
 Bootstrap: docker
-From: trinityrnaseq/trinityrnaseq:2.6.6
+From: trinityrnaseq/trinityrnaseq:2.8.0
 
 %help
 
-    Container for Trinity 2.6.6
+    Container for Trinity 2.8.0
     https://github.com/trinityrnaseq/trinityrnaseq/releases
 
 %labels
 
-    VERSION "Trinity 2.6.6"
+    VERSION "Trinity 2.8.0"
 
 %post
     
@@ -30,7 +30,7 @@ From: trinityrnaseq/trinityrnaseq:2.6.6
 
 %environment
 
-    PATH="${PATH}:/usr/local/bin/trinityrnaseq/util:/usr/local/bin/trinityrnaseq/util/support_scripts"
+    PATH="${PATH}:/usr/local/bin/trinityrnaseq/util:/usr/local/bin/trinityrnaseq/util/support_scripts:/usr/local/bin/trinityrnaseq/util/misc"
 
 %runscript
 

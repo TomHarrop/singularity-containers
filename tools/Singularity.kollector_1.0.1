@@ -1,10 +1,13 @@
 Bootstrap: docker
-From: bcgsc/abyss:latest
+From: ubuntu:18.04
 
 %help
 
     kollector 1.0.1
     https://github.com/bcgsc/kollector
+    ABySS 2.1.0
+    biobloomtools 2.1.1
+    gmap/gsnap 2018-07-04
 
 %labels
 
@@ -17,18 +20,39 @@ From: bcgsc/abyss:latest
     apt-get update
     apt-get install -y \
         automake \
+        bc \
+        bsdmainutils \
         build-essential \
         bwa \
         gcc-6 \
         g++-6 \
         language-pack-en \
         libboost-dev \
+        libgomp1 \
+        libopenmpi-dev \
         libsdsl-dev \
         libsparsehash-dev \
+        openmpi-bin \
         samtools \
+        ssh \
         time \
         wget \
         zlib1g-dev
+
+    # install abyss
+    wget -O abyss.tar.gz \
+        --no-check-certificate \
+        https://github.com/bcgsc/abyss/releases/download/2.1.0/abyss-2.1.0.tar.gz
+    mkdir abyss
+    tar -zxf abyss.tar.gz \
+        -C abyss \
+        --strip-components 1
+    cd abyss || exit 1
+    ./configure --with-mpi=/usr/lib/x86_64-linux-gnu/openmpi
+    make
+    make install
+    cd .. || exit 1
+    rm -rf abyss abyss.tar.gz
 
     # install biobloom tools
     wget \

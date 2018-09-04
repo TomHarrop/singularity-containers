@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: rocker/verse:latest
+From: rocker/verse:3.5.0
 
 %help
 

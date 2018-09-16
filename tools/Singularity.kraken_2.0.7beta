@@ -21,6 +21,7 @@ From: ubuntu:18.04
         libgomp1 \
         libopenmpi-dev \
         openmpi-bin \
+        rsync \
         wget
 
     # install kraken

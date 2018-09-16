@@ -20,6 +20,7 @@ From: ubuntu:18.04
         language-pack-en \
         libgomp1 \
         libopenmpi-dev \
+        ncbi-blast+ \
         openmpi-bin \
         rsync \
         wget

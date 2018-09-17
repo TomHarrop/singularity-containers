@@ -24,4 +24,5 @@
 - [SCRMshaw 05142018](http://halfonlab.ccr.buffalo.edu/scrmshaw.html)
 - [Salmon 0.11.1](https://github.com/COMBINE-lab/salmon/releases)
 - [Stacks 2.0b](http://catchenlab.life.illinois.edu/stacks/)
+- [Spades 3.12.0](http://cab.spbu.ru/software/spades/)
 - [Trinity 2.6.6](https://github.com/trinityrnaseq/trinityrnaseq)

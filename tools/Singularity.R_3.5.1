@@ -35,3 +35,7 @@ From: rocker/verse:3.5.1
     Rscript -e "library('extrafont') ; \
         font_import(prompt=FALSE) ; \
         loadfonts()"
+
+%runscript
+
+    exec /usr/local/bin/R "$@"

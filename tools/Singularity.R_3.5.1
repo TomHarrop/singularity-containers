@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: rocker/verse:3.5.0
+From: rocker/verse:3.5.1
 
 %help
 
@@ -8,12 +8,20 @@ From: rocker/verse:3.5.0
 %labels
 
     MAINTAINER "Tom Harrop"
-    VERSION "R 3.5.0"
+    VERSION "R 3.5.1"
 
 %post
 
+    # install depenedencies
+    apt-get update
+    apt-get install -y \
+        libbz2-dev \
+        liblzma-dev \
+        libpcre++-dev 
+
     # install packages from bioconductor
-    Rscript -e "source('https://bioconductor.org/biocLite.R') ; \
+    Rscript -e "options(Ncpus=8); \
+        source('https://bioconductor.org/biocLite.R') ; \
         biocLite(c('Cairo', 'data.table', 'extrafont', 'ggimage', 'ggtree', 'sysfonts'), \
             type='source', ask=FALSE)"
 

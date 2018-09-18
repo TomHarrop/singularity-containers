@@ -3,7 +3,7 @@ From: bioconductor/release_core2:R3.5.1_Bioc3.7
 
 %help
 
-    R 3.5.1 with Bioconductor 3.7 and DESeq2_1.20.0 
+    R 3.5.1 with Bioconductor 3.7, DESeq2_1.20.0 and Mfuzz_2.40.0
     
 %labels
 
@@ -11,6 +11,16 @@ From: bioconductor/release_core2:R3.5.1_Bioc3.7
     VERSION "Bioconductor 3.7"
 
 %post
+
+    # install depenedencies
+    apt-get update
+    apt-get install -y \
+        libbz2-dev \
+        liblzma-dev \
+        libpcre++-dev \
+        tk-dev \
+        tcl-dev
+
     # install packages from bioconductor
     Rscript -e "options(Ncpus=8); \
         BiocInstaller::biocLite(c( \

@@ -20,7 +20,7 @@
 - [meraculous 2.2.6](https://jgi.doe.gov/data-and-tools/meraculous/)
 - [minimap2 2.11 r797](https://github.com/lh3/minimap2)
 - [mummer 4.0.0beta2](https://mummer4.github.io/)
-- [plink 1.07](http://zzz.bwh.harvard.edu/plink)
+- [plink 1.09 beta 5](http://www.cog-genomics.org/plink/1.9/)
 - [R 3.5.0](http://r-project.org/)
 - [SCRMshaw 05142018](http://halfonlab.ccr.buffalo.edu/scrmshaw.html)
 - [Salmon 0.11.1](https://github.com/COMBINE-lab/salmon/releases)

@@ -3,13 +3,13 @@ From: ubuntu:18.04
 
 %help
 
-    plink 1.09 beta 5
+    plink 1.90 beta 5
     http://www.cog-genomics.org/plink/1.9/
 
 %labels
 
     MAINTAINER "Tom Harrop"
-    VERSION "plink 1.09 beta 5"
+    VERSION "plink 1.90 beta 5"
 
 %post
 
@@ -42,4 +42,4 @@ From: ubuntu:18.04
 
 %runscript
 
-    exec /usr/bin/plink "$@"
+    exec /usr/local/bin/plink "$@"

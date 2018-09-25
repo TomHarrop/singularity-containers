@@ -22,7 +22,15 @@ From: rocker/verse:3.5.1
     # install packages from bioconductor
     Rscript -e "options(Ncpus=8); \
         source('https://bioconductor.org/biocLite.R') ; \
-        biocLite(c('Cairo', 'data.table', 'extrafont', 'ggimage', 'ggtree', 'sysfonts'), \
+        biocLite(c(\
+            'Cairo', \
+            'data.table', \
+            'extrafont', \
+            'ggimage', \
+            'ggtree', \
+            'UpSetR', \
+            'sysfonts', \
+            'VennDiagram'), \
             type='source', ask=FALSE)"
 
     # install lato

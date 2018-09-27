@@ -34,7 +34,7 @@ From: ubuntu:18.04
     cd mothur || exit 1
     make
     mv mothur /usr/local/bin/
-    cp .. || exit 1
+    cd .. || exit 1
     rm -rf mothur mothur.tar.gz
 
 %runscript

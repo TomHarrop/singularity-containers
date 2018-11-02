@@ -15,6 +15,7 @@
 - [borgbackup 1.1.6](https://github.com/borgbackup/borg)
 - [BUSCO 3.0.2](http://busco.ezlab.org/)
 - [Clustal Omega 1.2.4](http://www.clustal.org/omega/)
+- [freebayes 1.2.0](https://github.com/ekg/freebayes)
 - [kraken2 2.0.7-beta](https://github.com/DerrickWood/kraken2)
 - [HMMER 3.2.1](http://www.hmmer.org/)
 - [meraculous 2.2.6](https://jgi.doe.gov/data-and-tools/meraculous/)

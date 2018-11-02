@@ -1,14 +1,14 @@
 Bootstrap: docker
-From: trinityrnaseq/trinityrnaseq:2.8.3
+From: trinityrnaseq/trinityrnaseq:2.8.4
 
 %help
 
-    Container for Trinity 2.8.3
+    Container for Trinity 2.8.4
     https://github.com/trinityrnaseq/trinityrnaseq/releases
 
 %labels
 
-    VERSION "Trinity 2.8.3"
+    VERSION "Trinity 2.8.4"
 
 %post
     
@@ -16,8 +16,8 @@ From: trinityrnaseq/trinityrnaseq:2.8.3
         && apt-get install -y \
         language-pack-en
 
-    # install RSEM
-    mkdir rsem-install
+    # install RSE
+Mdo    mkdir rsem-install
     wget -O "rsem.tar.gz" \
         https://github.com/deweylab/RSEM/archive/v1.3.0.tar.gz
     tar -zxf rsem.tar.gz \

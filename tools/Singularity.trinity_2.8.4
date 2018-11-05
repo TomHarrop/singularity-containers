@@ -44,22 +44,22 @@ From: combinelab/salmon:0.11.3
     update-java-alternatives --set java-1.8.0-openjdk-amd64
 
     # download trinity
-    mkdir trinity
-    wget -O "trinity.tar.gz" \
+    mkdir trinityrnaseq
+    wget -O "trinityrnaseq.tar.gz" \
         https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.8.4.tar.gz
-    tar -zxf trinity.tar.gz \
-        -C trinity \
+    tar -zxf trinityrnaseq.tar.gz \
+        -C trinityrnaseq \
         --strip-components 1
-    cd trinity || exit 1
+    cd trinityrnaseq || exit 1
     make && make plugins && make install
     cd .. || exit 1
-    rm -rf trinity.tar.gz trinity
+    rm -rf trinityrnaseq.tar.gz trinityrnaseq
 
 %environment
 
-    export PATH="${PATH}:/usr/local/bin/trinity:/usr/local/bin/trinity/util:/usr/local/bin/trinity/util/support_scripts:/usr/local/bin/trinity/util/misc"
-    export TRINITY_HOME=/usr/local/bin/trinity
+    export PATH="${PATH}:/usr/local/bin/trinityrnaseq:/usr/local/bin/trinityrnaseq/util:/usr/local/bin/trinityrnaseq/util/support_scripts:/usr/local/bin/trinityrnaseq/util/misc"
+    export TRINITY_HOME=/usr/local/bin/trinityrnaseq
 
 %runscript
 
-    exec /usr/local/bin/trinity/Trinity "$@"
+    exec /usr/local/bin/trinityrnaseq/Trinity "$@"

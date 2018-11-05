@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: trinityrnaseq/trinityrnaseq:2.8.4
+From: combinelab/salmon:0.11.3
 
 %help
 
@@ -12,11 +12,23 @@ From: trinityrnaseq/trinityrnaseq:2.8.4
 
 %post
     
-    apt-get update \
-        && apt-get install -y \
-        language-pack-en
+    # dependencies
+    apt-get update
+    apt-get install -y \
+        bowtie2 \
+        jellyfish \
+        language-pack-en \
+        openjdk-8-jre \
+        python-pip \
+        rsync \
+        samtools \
+        wget
 
-    # install RSE
+    # update pip and reinstall numpy
+    /usr/bin/pip install --upgrade pip
+    /usr/local/bin/pip install numpy
+
+    # install RSEM
     mkdir rsem-install
     wget -O "rsem.tar.gz" \
         https://github.com/deweylab/RSEM/archive/v1.3.0.tar.gz
@@ -28,10 +40,26 @@ From: trinityrnaseq/trinityrnaseq:2.8.4
     cd ..
     rm -rf rsem.tar.gz rsem-install
 
+    # choose java 8
+    update-java-alternatives --set java-1.8.0-openjdk-amd64
+
+    # download trinity
+    mkdir trinity
+    wget -O "trinity.tar.gz" \
+        https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.8.4.tar.gz
+    tar -zxf trinity.tar.gz \
+        -C trinity \
+        --strip-components 1
+    cd trinity || exit 1
+    make && make plugins && make install
+    cd .. || exit 1
+    rm -rf trinity.tar.gz trinity
+
 %environment
 
-    PATH="${PATH}:/usr/local/bin/trinityrnaseq/util:/usr/local/bin/trinityrnaseq/util/support_scripts:/usr/local/bin/trinityrnaseq/util/misc"
+    export PATH="${PATH}:/usr/local/bin/trinity:/usr/local/bin/trinity/util:/usr/local/bin/trinity/util/support_scripts:/usr/local/bin/trinity/util/misc"
+    export TRINITY_HOME=/usr/local/bin/trinity
 
 %runscript
 
-    exec /usr/local/bin/trinityrnaseq/Trinity "$@"
+    exec /usr/local/bin/trinity/Trinity "$@"

@@ -38,7 +38,7 @@ From: combinelab/salmon:0.11.3
         -C rsem-install \
         --strip-components 1
     cd rsem-install
-    make -j && make install
+    make && make install
     cd ..
     rm -rf rsem.tar.gz rsem-install
 
@@ -53,7 +53,7 @@ From: combinelab/salmon:0.11.3
         -C trinityrnaseq \
         --strip-components 1
     cd trinityrnaseq || exit 1
-    make -j && make -j plugins && make install
+    make && make plugins && make install
     cd .. || exit 1
     rm -rf trinityrnaseq.tar.gz trinityrnaseq
 

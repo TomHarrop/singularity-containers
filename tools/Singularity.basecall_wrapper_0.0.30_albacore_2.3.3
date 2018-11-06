@@ -52,7 +52,8 @@ From: rocker/tidyverse:3.5.1
     # lanfear QC script
     Rscript -e "install.packages(c( \
         'futile.logger', \
-        'optparse'))"
+        'optparse', \
+        'viridis'))"
 
     wget \
         -O /usr/local/bin/MinIONQC.R \

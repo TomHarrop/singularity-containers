@@ -19,14 +19,16 @@ From: combinelab/salmon:0.11.3
         jellyfish \
         language-pack-en \
         openjdk-8-jre \
-        python-pip \
+        python-numpy \
         rsync \
         samtools \
         wget
 
+        # python-pip \
+
     # update pip and reinstall numpy
-    /usr/bin/pip install --upgrade pip
-    /usr/local/bin/pip install numpy
+    # /usr/bin/pip install --upgrade pip
+    # /usr/local/bin/pip install numpy
 
     # install RSEM
     mkdir rsem-install
@@ -36,7 +38,7 @@ From: combinelab/salmon:0.11.3
         -C rsem-install \
         --strip-components 1
     cd rsem-install
-    make && make install
+    make -j && make install
     cd ..
     rm -rf rsem.tar.gz rsem-install
 
@@ -51,7 +53,7 @@ From: combinelab/salmon:0.11.3
         -C trinityrnaseq \
         --strip-components 1
     cd trinityrnaseq || exit 1
-    make && make plugins && make install
+    make -j && make -j plugins && make install
     cd .. || exit 1
     rm -rf trinityrnaseq.tar.gz trinityrnaseq
 

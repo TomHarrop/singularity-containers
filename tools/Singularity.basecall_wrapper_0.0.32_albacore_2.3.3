@@ -43,11 +43,14 @@ From: rocker/tidyverse:3.5.1
         snakemake
 
     # install albacore
-    /usr/local/bin/pip3 install \
+    /usr/local/bin/pip3 \
+        install \
         https://mirror.oxfordnanoportal.com/software/analysis/ont_albacore-2.3.3-cp35-cp35m-manylinux1_x86_64.whl
 
     # install basecall_wrapper
-    /usr/local/bin/pip3 install git+git://github.com/tomharrop/basecall_wrapper.git
+    /usr/local/bin/pip3 \
+        install \
+        git+git://github.com/tomharrop/basecall_wrapper.git@v0.0.32
 
     # lanfear QC script
     Rscript -e "install.packages(c( \

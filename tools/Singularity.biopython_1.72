@@ -15,4 +15,4 @@ From: python:3.6.6-stretch
     exec /usr/local/bin/python "$@"
 
 %post
-    pip3 install biopython==1.72
+    pip3 install biopython==1.72 intermine

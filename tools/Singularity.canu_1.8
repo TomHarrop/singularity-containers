@@ -1,0 +1,37 @@
+Bootstrap: docker
+From: ubuntu:18.10 
+
+%help
+
+    Container for Canu 1.8
+    https://github.com/marbl/canu
+
+%labels
+
+    VERSION "Canu 1.8"
+
+%post
+    
+    # dependencies
+    apt-get update
+    apt-get install -y \
+        build-essential \
+        gnuplot \
+        language-pack-en \
+        openjdk-8-jre \
+        perl
+
+    # install Canu
+    wget -O "canu.tar.gz" \
+        --no-check-certificate \
+        https://github.com/marbl/canu/archive/v1.8.tar.gz
+    mkdir canu
+    tar -zxf canu.tar.gz \
+        -C canu \
+        --strip-components 1
+    exit 0
+    cd canu || exit 1
+    PREFIX=/usr/local ./spades_compile.sh
+    cd .. || exit 1
+    rm -rf canu canu.tar.gz
+

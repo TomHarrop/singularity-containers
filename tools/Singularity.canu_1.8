@@ -32,9 +32,18 @@ From: ubuntu:18.10
     tar -zxf canu.tar.gz \
         -C canu \
         --strip-components 1
-    exit 0
-    cd canu || exit 1
-    PREFIX=/usr/local ./spades_compile.sh
-    cd .. || exit 1
-    rm -rf canu canu.tar.gz
+    cd canu/src || exit 1
+    make
+    cd ../.. || exit 1
+    rm -rf canu.tar.gz
+
+%environment
+
+    export PATH="${PATH}:/canu/Linux-amd64/bin"
+
+%runscript
+
+    exec /canu/Linux-amd64/bin/canu "$@"
+
+
 

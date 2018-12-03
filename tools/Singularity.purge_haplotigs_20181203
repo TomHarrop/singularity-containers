@@ -19,7 +19,6 @@ From: rocker/verse:3.5.1
         build-essential \
         fig2dev \
         gnuplot \
-        language-pack-en \
         samtools \
         wget \
         zlib1g-dev \

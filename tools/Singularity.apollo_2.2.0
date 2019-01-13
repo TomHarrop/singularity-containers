@@ -85,7 +85,8 @@ From: ubuntu:18.04
     su apollo bash -c 'cd ; source /apollo/.sdkman/bin/sdkman-init.sh && yes | sdk install gradle 3.2.1'
 
     # build apollo (fails intermittently downloading electron)
-    cp sample-postgres-apollo-config.groovy apollo-config.groovy
+    rm /apollo/apollo-config.groovy
+    cp /apollo/sample-postgres-apollo-config.groovy /apollo/apollo-config.groovy
     su apollo bash -c 'cd /apollo ; source /apollo/.sdkman/bin/sdkman-init.sh ; ./apollo clean-all ; ./apollo deploy 2>&1 | tee deploy.log'
 
 %startscript

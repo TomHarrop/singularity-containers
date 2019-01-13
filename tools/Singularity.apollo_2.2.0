@@ -25,6 +25,7 @@ From: ubuntu:18.04
         libpng-dev \
         libpq-dev \
         maven \
+        nano \
         netcat \
         openjdk-8-jdk \
         postgresql \
@@ -87,7 +88,19 @@ From: ubuntu:18.04
     # build apollo (fails intermittently downloading electron)
     rm /apollo/apollo-config.groovy
     cp /apollo/sample-postgres-apollo-config.groovy /apollo/apollo-config.groovy
+    chown apollo:apollo /apollo/apollo-config.groovy
     su apollo bash -c 'cd /apollo ; source /apollo/.sdkman/bin/sdkman-init.sh ; ./apollo clean-all ; ./apollo deploy 2>&1 | tee deploy.log'
+
+    # check database credentials in apollo-config.groovy
+    # service postgresql start
+    # add user to postgresql, e.g. su postgres ; createuser -RDIElPS test
+    # initialise db, e.g. su postgres ; createdb apollo-production apollo-production
+    # service postgresql restart
+    # service tomcat8 restart
+
+    # set tomcat8 user/group in /etc/default
+    # set postresql user/group ?/etc/postgresql/10/main/environment
+
 
 %startscript
     su apollo bash -c 'cd ; source /apollo/.sdkman/bin/sdkman-init.sh ; /apollo/apollo run-local'

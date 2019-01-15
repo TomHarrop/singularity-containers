@@ -13,12 +13,12 @@ From: ubuntu:18.10
     # deps
     apt-get clean
     apt-get update
-#    apt-get install -y netplan.io
     apt-get install -y \
         build-essential \
         default-jre \
         language-pack-en \
         libfreetype6-dev \
+        libgd-perl \
         libpng-dev \
         pkg-config \
         python \
@@ -31,6 +31,33 @@ From: ubuntu:18.10
 
     # additional deps
     PERL_MM_USE_DEFAULT=1 cpan 'install Time::HiRes'
+
+    # install circos
+    perl -MCPAN -e \
+        'install Config::General ; \
+        install Clone ; \
+        install Font::TTF::Font ; \
+        install List::MoreUtils ; \
+        install Math::Bezier ; \
+        install Math::Round ; \
+        install Math::VecStat ; \
+        install Params::Validate ; \
+        install Readonly ; \
+        install Regexp::Common ; \
+        install SVG ; \
+        install Set::IntSpan ; \
+        install Statistics::Basic ; \
+        install Text::Format'
+
+    mkdir circos
+    wget -O "circos.tar.gz" \
+        http://circos.ca/distribution/circos-0.69-6.tgz
+    tar -zxf circos.tar.gz \
+        -C circos \
+        --strip-components 1
+    rm circos.tar.gz
+    export PATH="${PATH}:/circos/bin"
+    circos -modules
 
     # install quast
     mkdir quast
@@ -46,5 +73,9 @@ From: ubuntu:18.10
     cd .. || exit 1
     rm -r quast quast.tar.gz
 
+%environment
+    export PATH="${PATH}:/circos/bin"
+
 %runscript
     exec /usr/local/bin/quast.py "$@"
+

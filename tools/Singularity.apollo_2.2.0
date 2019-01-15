@@ -2,7 +2,7 @@ Bootstrap: docker
 From: ubuntu:18.04
 
 %help
-    GMOD Apollo 2.2.0
+    GMOD Apollo 2.2.0 
 
 %labels
     MAINTAINER "Tom Harrop"

@@ -20,6 +20,7 @@ From: ubuntu:18.10
         libfreetype6-dev \
         libgd-perl \
         libpng-dev \
+        libtime-hr-perl \
         pkg-config \
         python \
         python-matplotlib \
@@ -28,9 +29,6 @@ From: ubuntu:18.10
         r-base-dev \
         zlib1g-dev \
         wget
-
-    # additional deps
-    PERL_MM_USE_DEFAULT=1 cpan 'install Time::HiRes'
 
     # install circos
     perl -MCPAN -e \

@@ -1,0 +1,50 @@
+Bootstrap: docker
+From: ubuntu:18.10
+
+%help
+    Quast 5.0.2
+    http://quast.bioinf.spbau.ru/
+
+%labels
+    MAINTAINER "Tom Harrop"
+    VERSION "QUAST 5.0.2"
+
+%post
+    # deps
+    apt-get clean
+    apt-get update
+#    apt-get install -y netplan.io
+    apt-get install -y \
+        build-essential \
+        default-jre \
+        language-pack-en \
+        libfreetype6-dev \
+        libpng-dev \
+        pkg-config \
+        python \
+        python-matplotlib \
+        python-pip \
+        python-setuptools \
+        r-base-dev \
+        zlib1g-dev \
+        wget
+
+    # additional deps
+    PERL_MM_USE_DEFAULT=1 cpan 'install Time::HiRes'
+
+    # install quast
+    mkdir quast
+    wget -O "quast.tar.gz" \
+        https://downloads.sourceforge.net/project/quast/quast-5.0.2.tar.gz
+    tar -zxf quast.tar.gz \
+        -C quast \
+        --strip-components 1
+    cd quast || exit 1
+    ./setup.py install_full
+    ./setup.py test
+    mv quast_test_output ../
+    cd .. || exit 1
+    rm -r quast quast.tar.gz
+
+%runscript
+    exec /usr/local/bin/quast.py "$@"

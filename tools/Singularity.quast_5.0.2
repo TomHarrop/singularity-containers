@@ -66,10 +66,8 @@ From: ubuntu:18.10
         --strip-components 1
     cd quast || exit 1
     ./setup.py install_full
-    ./setup.py test
-    mv quast_test_output ../
     cd .. || exit 1
-    rm -r quast quast.tar.gz
+    rm quast.tar.gz
 
     # re-download genemark "license" (needs BASH)
     cat <<- '_EOF_' > run_me.sh
@@ -89,6 +87,14 @@ From: ubuntu:18.10
 _EOF_
     /bin/bash -eux run_me.sh
     rm run_me.sh
+
+    # test quast
+    cd quast || exit 1
+    ./setup.py test
+    mv quast_test_output ../
+    chmod -R 777 ../quast_test_output
+    cd .. || exit 1   
+    rm -r quast
 
 %environment
     export PATH="${PATH}:/circos/bin"

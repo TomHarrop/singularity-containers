@@ -1,0 +1,46 @@
+Bootstrap: docker
+From: ubuntu:18.10
+
+%help
+    Racon 1.3.2
+    https://github.com/isovic/racon
+
+%labels
+    MAINTAINER "Tom Harrop"
+    VERSION "Flye 1.3.2"
+
+%post
+    # deps
+    apt-get clean
+    apt-get update
+    apt-get install -y \
+        build-essential \
+        cmake \
+        language-pack-en \
+        python \
+        wget 
+
+    # install racon
+    mkdir racon
+    wget -O "racon.tar.gz" \
+        --no-check-certificate \
+        https://github.com/isovic/racon/releases/download/1.3.2/racon-v1.3.2.tar.gz
+    tar -zxf racon.tar.gz \
+        -C racon \
+        --strip-components 1
+
+    cd racon || exit 1
+    mkdir build && cd build || exit 1
+    cmake \
+        -DCMAKE_BUILD_TYPE=Release \
+        -Dracon_build_tests=ON \
+        -Dracon_build_wrapper=ON \
+        ..
+    make && make install
+
+%runscript
+    exec /usr/local/bin/racon "$@"
+
+%environment
+    export PATH="${PATH}:/racon/build/bin"
+

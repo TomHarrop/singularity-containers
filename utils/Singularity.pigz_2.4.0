@@ -12,7 +12,7 @@ From: alpine:3.9
 
 %post
 
-    apk add --update pigz
+    apk add --update bash pigz
 
 %runscript
     exec /usr/bin/pigz "$@"

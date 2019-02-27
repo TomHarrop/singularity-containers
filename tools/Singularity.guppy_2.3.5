@@ -1,0 +1,33 @@
+Bootstrap: docker
+From: ubuntu:16.04
+
+%help
+    Guppy 2.3.5
+
+%labels
+    MAINTAINER "Tom Harrop"
+    VERSION "Guppy 2.3.5"
+
+%post
+    # deps
+    apt-get update
+    apt-get install -y \
+        apt-transport-https \
+        lsb-release \
+        wget 
+
+    # install guppy from ONT repo
+    exit 0
+    export PLATFORM=$(lsb_release -cs) 
+    wget -O- https://mirror.oxfordnanoportal.com/apt/ont-repo.pub \
+        | apt-key add - 
+    echo \
+        "deb http://mirror.oxfordnanoportal.com/apt ${PLATFORM}-stable non-free" \
+        | tee /etc/apt/sources.list.d/nanoporetech.sources.list 
+    apt-get update
+    DEBIAN_FRONTEND=noninteractive \
+        apt-get install -y \
+        ont-guppy=2.3.5-1~xenial
+
+%runscript
+    exec /usr/bin/guppy_basecaller "$@"

@@ -19,9 +19,13 @@ From: tensorflow/tensorflow:1.13.1-gpu-py3
     # prereqs
     apt-get update
     apt-get install -y \
-        git
+        git \
+        language-pack-en
 
     # install Deepbinner
+    export LANG=en_US.UTF-8  
+    export LANGUAGE=en_US:en
+    export LC_ALL=en_US.UTF-8     
     /usr/local/bin/pip3 \
         install \
         git+git://github.com/rrwick/Deepbinner.git@v0.2.0

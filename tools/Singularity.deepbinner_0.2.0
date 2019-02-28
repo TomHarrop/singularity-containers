@@ -19,9 +19,7 @@ From: tensorflow/tensorflow:1.13.1-gpu-py3
     # prereqs
     apt-get update
     apt-get install -y \
-        git \
-        nvidia-410
-
+        git
 
     exit 0
     # install Deepbinner

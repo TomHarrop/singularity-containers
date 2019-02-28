@@ -21,7 +21,6 @@ From: tensorflow/tensorflow:1.13.1-gpu-py3
     apt-get install -y \
         git
 
-    exit 0
     # install Deepbinner
     /usr/local/bin/pip3 \
         install \

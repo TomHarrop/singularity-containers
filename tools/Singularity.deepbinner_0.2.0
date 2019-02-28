@@ -1,0 +1,30 @@
+Bootstrap: docker
+From: tensorflow/tensorflow:1.13.1-gpu-py3
+
+%help
+
+    Deepbinner 0.2.0
+    
+%labels
+
+    MAINTAINER "Tom Harrop (twharrop@gmail.com) "
+    VERSION "deepbinner 0.2.0"
+
+%runscript
+
+    exec /usr/local/bin/deepbinner "$@"
+
+%post
+
+    # prereqs
+    apt-get update
+    apt-get install -y \
+        git \
+        nvidia-410
+
+
+    exit 0
+    # install Deepbinner
+    /usr/local/bin/pip3 \
+        install \
+        git+git://github.com/rrwick/Deepbinner.git@v0.2.0

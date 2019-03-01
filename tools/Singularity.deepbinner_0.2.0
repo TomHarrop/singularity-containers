@@ -3,12 +3,12 @@ From: python:3.6.8-stretch
 
 %help
 
-    Deepbinner 0.2.0
+    Deepbinner 0.2.0 319bae8
     
 %labels
 
     MAINTAINER "Tom Harrop (twharrop@gmail.com) "
-    VERSION "deepbinner 0.2.0"
+    VERSION "deepbinner 0.2.0 319bae8"
 
 %runscript
 
@@ -30,4 +30,5 @@ From: python:3.6.8-stretch
 
     pip3 install \
         tensorflow \
-        git+git://github.com/rrwick/Deepbinner.git@319bae84bfb3b0f3ab279b70e9e0a886156414bf
+        ont-fast5-api \
+        git+git://github.com/rrwick/Deepbinner.git@319bae8

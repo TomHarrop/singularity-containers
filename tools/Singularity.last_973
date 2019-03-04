@@ -13,6 +13,8 @@ From: alpine:3.9
         bash \
         build-base \
         gcc \
+        parallel \
+        python \
         wget \
         zlib-dev
 

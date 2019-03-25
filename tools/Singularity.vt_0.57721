@@ -13,7 +13,6 @@ From: alpine:3.9
         bash \
         build-base \
         bzip2-dev \
-        curl-dev \
         gcc \
         git \
         wget \

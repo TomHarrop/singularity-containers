@@ -26,7 +26,8 @@ From: ubuntu:16.04
     apt-get update
     DEBIAN_FRONTEND=noninteractive \
         apt-get install -y \
-        ont-guppy=2.3.7-1~xenial
+        ont-guppy=2.3.7-1~xenial \
+        nvidia-modprobe
 
 %runscript
     exec /usr/bin/guppy_basecaller "$@"

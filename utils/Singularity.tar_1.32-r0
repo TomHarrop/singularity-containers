@@ -1,0 +1,16 @@
+Bootstrap: docker
+From: alpine:3.9
+
+%help
+    tar 1.32-r0
+
+%labels
+    VERSION "tar 1.32-r0"
+
+%post
+    # packages
+    apk add --update \
+        tar
+
+%runscript
+    exec /bin/tar "$@"

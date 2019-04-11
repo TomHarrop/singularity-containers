@@ -1,0 +1,41 @@
+Bootstrap: docker
+From: alpine:3.9
+
+%help
+
+    krakenuniq 0.5.8
+    https://github.com/fbreitwieser/krakenuniq
+
+%labels
+
+    MAINTAINER "Tom Harrop"
+    VERSION "krakenuniq 0.5.8"
+
+%post
+
+    # dependencies
+    apk add --update \
+        bash \
+        build-base \
+        git \
+        perl \
+        wget \
+        zlib-dev
+
+    # install krakenuniq
+    wget -O krakenuniq.tar.gz \
+        --no-check-certificate \
+        https://github.com/fbreitwieser/krakenuniq/archive/v0.5.8.tar.gz
+
+    mkdir krakenuniq
+    tar -zxf krakenuniq.tar.gz \
+        -C krakenuniq \
+        --strip-components 1
+    cd krakenuniq || exit 1
+    ./install_krakenuniq.sh -j /usr/local/bin
+    cd .. || exit 1
+    rm -rf krakenuniq krakenuniq.tar.gz
+
+%runscript
+
+    exec /usr/local/bin/krakenuniq "$@"

@@ -19,8 +19,13 @@ From: alpine:3.9
         build-base \
         git \
         perl \
+        perl-app-cpanminus \
+        perl-dev \
         wget \
         zlib-dev
+
+    # intall perl modules
+    cpanm LWP::Simple
 
     # install krakenuniq
     wget -O krakenuniq.tar.gz \

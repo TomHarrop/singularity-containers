@@ -2,12 +2,12 @@ Bootstrap: docker
 From: ubuntu:18.10
 
 %help
-    Flye 2.4 
+    Flye 2.4.2
     https://github.com/fenderglass/Flye
 
 %labels
     MAINTAINER "Tom Harrop"
-    VERSION "Flye 2.4 "
+    VERSION "Flye 2.4.2"
 
 %post
     # deps
@@ -24,7 +24,7 @@ From: ubuntu:18.10
     mkdir Flye
     wget -O "Flye.tar.gz" \
         --no-check-certificate \
-        https://github.com/fenderglass/Flye/archive/2.4.tar.gz
+        https://github.com/fenderglass/Flye/archive/2.4.2.tar.gz
     tar -zxf Flye.tar.gz \
         -C Flye \
         --strip-components 1

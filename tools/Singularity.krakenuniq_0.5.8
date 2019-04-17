@@ -25,13 +25,14 @@ From: alpine:3.9
         zlib-dev
 
     # intall perl modules
-    cpanm LWP::Simple
+    cpanm --force ExtUtils::Helpers
+    cpanm LWP::Simple || cat /.cpanm/work/*/build.log
 
     # install ncbi blast+
     # can't compile because of broken alpine libc
     # have to use NCBI binaries
     wget -O blast.tar.gz \
-        ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.9.0/ncbi-blast-2.9.0+-x64-linux.tar.gz
+        ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.31/ncbi-blast-2.2.31+-x64-linux.tar.gz
     mkdir blast
     tar -zxf blast.tar.gz \
         -C blast \

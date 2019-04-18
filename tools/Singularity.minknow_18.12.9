@@ -3,7 +3,13 @@ From: ubuntu:16.04
 
 %help
     ONT MinKNOW 18.12.9-1 GUI in a container
-    https://community.nanoporetech.com/protocols/experiment-companion-minknow/v/mke_1013_v1_revam_11apr2016/installing-minknow-on-linu
+
+    Run as follows:
+
+    singularity instance start \
+        -B output/dir/run:/run,output/dir/var:/var \
+        minknow_18.12.9.sif \
+        minknow
 
 %labels
     MAINTAINER "Tom Harrop"
@@ -30,10 +36,6 @@ From: ubuntu:16.04
     apt update
     apt install -y minknow-nc=18.12.9-1~xenial
 
-%runscript
-    /opt/ONT/MinKNOW/bin/mk_manager_svc &
-    /opt/ui/MinKNOW
-
 %startscript
     /opt/ONT/MinKNOW/bin/mk_manager_svc &
-    /opt/ui/MinKNOW    
+    nohup /opt/ui/MinKNOW > /dev/null 2>&1 < /dev/null &

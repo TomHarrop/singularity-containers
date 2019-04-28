@@ -11,6 +11,7 @@ From: TomHarrop/singularity-containers:samtools_1.9
 
 %post
     apk add --update \
+        gawk \
         openjdk8
 
     wget -O "bbmap.tar.gz" \

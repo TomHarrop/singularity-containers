@@ -1,5 +1,5 @@
 Bootstrap: debootstrap
-OSVersion: cosmic
+OSVersion: bionic
 MirrorURL: http://archive.ubuntu.com/ubuntu/
 Include: default-jre wget samtools
 

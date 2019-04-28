@@ -11,7 +11,7 @@ From: TomHarrop/singularity-containers:samtools_1.9
 
 %post
     apk add --update \
-        openjdk9-jre
+        openjdk8
 
     wget -O "bbmap.tar.gz" \
         "https://sourceforge.net/projects/bbmap/files/BBMap_38.45.tar.gz"

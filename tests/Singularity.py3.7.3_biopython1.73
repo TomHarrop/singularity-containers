@@ -1,0 +1,30 @@
+Bootstrap: docker
+From: ubuntu:19.04
+
+%help
+    Container for testing biopython index_db()
+    https://github.com/tomharrop/racon-chunks
+
+    Python 3.7.3 with biopython 1.73
+
+%labels
+    MAINTAINER "Tom Harrop"
+
+%runscript
+    exec /usr/bin/python3 "$@"
+
+%post
+    # dependencies
+    apt-get update
+    apt-get install -y \
+        python3-pip
+
+    # python + biopython
+    /usr/bin/pip3 install --upgrade pip
+    /usr/local/bin/pip3 install \
+        biopython==1.73
+    update-alternatives \
+        --install /usr/bin/python \
+        python \
+        /usr/bin/python3 \
+        1

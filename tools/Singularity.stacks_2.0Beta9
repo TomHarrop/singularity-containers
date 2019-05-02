@@ -1,7 +1,7 @@
 Bootstrap: debootstrap
 OSVersion: bionic
 MirrorURL: http://archive.ubuntu.com/ubuntu/
-Include: build-essential language-pack-en wget zlib1g-dev
+Include: build-essential language-pack-en wget zlib1g-dev python2.7
 
 %help
 
@@ -14,6 +14,12 @@ Include: build-essential language-pack-en wget zlib1g-dev
     VERSION "stacks 2.0Beta9"
 
 %post
+    # set up python
+    update-alternatives \
+        --install /usr/bin/python \
+        python \
+        /usr/bin/python2.7 \
+        1
 
     # install stacks
     wget -O "stacks.tar.gz" \

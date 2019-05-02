@@ -19,7 +19,7 @@ From: python:3.7.3-stretch
         biopython==1.73
 
     # Modify Bio/File.py to get an earlier error message
-    bio_file='/usr/local/lib/python3.7/dist-packages/Bio/File.py'
+    bio_file='/usr/local/lib/python3.7/site-packages/Bio/File.py'
     line1='# con.execute("CREATE TABLE offset_data (key TEXT PRIMARY KEY, "'
     line2='#             "offset INTEGER);")'
 

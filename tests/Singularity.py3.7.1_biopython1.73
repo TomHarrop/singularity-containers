@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: python:3.7.3-stretch
+From: python:3.7.1-stretch
 
 %help
 
@@ -17,3 +17,4 @@ From: python:3.7.3-stretch
 %post
     /usr/local/bin/pip3 install \
         biopython==1.73
+        

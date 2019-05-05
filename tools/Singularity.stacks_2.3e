@@ -23,7 +23,7 @@ Include: build-essential language-pack-en wget zlib1g-dev python2.7
 
     # install stacks
     wget -O "stacks.tar.gz" \
-        http://catchenlab.life.illinois.edu/stacks/source/stacks-2.0b.tar.gz
+        http://catchenlab.life.illinois.edu/stacks/source/stacks-2.3e.tar.gz
     mkdir stacks-install
     tar -zxf stacks.tar.gz \
         -C stacks-install \

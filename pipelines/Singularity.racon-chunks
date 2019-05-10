@@ -40,7 +40,9 @@ From: ubuntu:19.04
     # python + biopython
     /usr/bin/pip3 install --upgrade pip
     /usr/local/bin/pip3 install \
-        biopython==1.73
+        biopython==1.73 \
+        pysam==0.15.2
+
     update-alternatives \
         --install /usr/bin/python \
         python \

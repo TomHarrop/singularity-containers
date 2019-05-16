@@ -15,7 +15,7 @@ From: ubuntu:19.04
     MAINTAINER "Tom Harrop"
 
 %runscript
-    exec /usr/local/bin/racon "$@"
+    exec /usr/local/bin/racon_chunks "$@"
 
 %environment
     export PATH="${PATH}:/racon/build/bin"
@@ -29,6 +29,7 @@ From: ubuntu:19.04
         cmake \
         default-jre \
         gawk \
+        git \
         language-pack-en \
         libbz2-dev  \
         liblzma-dev \
@@ -41,6 +42,15 @@ From: ubuntu:19.04
     /usr/bin/pip3 install --upgrade pip
     /usr/local/bin/pip3 install \
         biopython==1.73
+
+    # datrie
+    /usr/bin/pip3 install \
+        git+https://github.com/pytries/datrie.git@3e22a27ca0104fe3c62b3251c0b75c281f089e43
+
+    # racon-chunks
+    /usr/local/bin/pip3 \
+        install \
+        git+git://github.com/tomharrop/racon-chunks.git@v0.0.1
 
     update-alternatives \
         --install /usr/bin/python \
@@ -119,6 +129,3 @@ From: ubuntu:19.04
         -Dracon_build_wrapper=ON \
         ..
     make && make install
-
-    # TO DO:
-    # make a package from racon-chunks and add to container

@@ -2,19 +2,28 @@ Bootstrap: docker
 From: ubuntu:16.04
 
 %help
-    Guppy 3.0.3
+    Guppy 3.1.5 with nvidia-410
 
 %labels
     MAINTAINER "Tom Harrop"
-    VERSION "Guppy 3.0.3"
+    VERSION "Guppy 3.1.5"
 
 %post
+    export DEBIAN_FRONTEND=noninteractive
+
     # deps
     apt-get update
     apt-get install -y \
         apt-transport-https \
         lsb-release \
+        nvidia-modprobe \
+        software-properties-common \
         wget 
+
+    # byo nvidia driver
+    add-apt-repository -y ppa:graphics-drivers/ppa
+    apt update
+    apt install -y nvidia-410 libcuda1-410
 
     # install guppy from ONT repo
     export PLATFORM=$(lsb_release -cs) 
@@ -24,10 +33,9 @@ From: ubuntu:16.04
         "deb http://mirror.oxfordnanoportal.com/apt ${PLATFORM}-stable non-free" \
         | tee /etc/apt/sources.list.d/nanoporetech.sources.list 
     apt-get update
-    DEBIAN_FRONTEND=noninteractive \
-        apt-get install -y \
-        ont-guppy=3.0.3-1~xenial \
-        nvidia-modprobe
+    apt-get install -y \
+        --no-install-recommends \
+        ont-guppy=3.1.5-1~xenial
 
 %runscript
     exec /usr/bin/guppy_basecaller "$@"

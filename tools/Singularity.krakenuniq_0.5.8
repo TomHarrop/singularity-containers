@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: alpine:3.9
+From: ubuntu:19.04
 
 %help
 
@@ -14,30 +14,20 @@ From: alpine:3.9
 %post
 
     # dependencies
-    apk add --update \
-        bash \
-        build-base \
+    apt update
+    apt install -y \
+        build-essential \
+        cpanminus \
+        curl \
         git \
-        perl \
-        perl-app-cpanminus \
-        perl-dev \
+        language-pack-en \
+        ncbi-blast+ \
         wget \
-        zlib-dev
+        zlib1g-dev 
 
     # intall perl modules
     cpanm --force ExtUtils::Helpers
     cpanm LWP::Simple || cat /.cpanm/work/*/build.log
-
-    # install ncbi blast+
-    # can't compile because of broken alpine libc
-    # have to use NCBI binaries
-    wget -O blast.tar.gz \
-        ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.31/ncbi-blast-2.2.31+-x64-linux.tar.gz
-    mkdir blast
-    tar -zxf blast.tar.gz \
-        -C blast \
-        --strip-components 1
-    rm -f blast.tar.gz
 
     # install krakenuniq
     wget -O krakenuniq.tar.gz \
@@ -52,10 +42,6 @@ From: alpine:3.9
     ./install_krakenuniq.sh -j /usr/local/bin
     cd .. || exit 1
     rm -rf krakenuniq krakenuniq.tar.gz
-
-%environment
-
-    export PATH="${PATH}:/blast/bin"
 
 %runscript
 

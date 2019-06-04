@@ -20,6 +20,7 @@ From: ubuntu:19.04
         cpanminus \
         curl \
         git \
+        jellyfish \
         language-pack-en \
         ncbi-blast+ \
         wget \
@@ -39,7 +40,7 @@ From: ubuntu:19.04
         -C krakenuniq \
         --strip-components 1
     cd krakenuniq || exit 1
-    ./install_krakenuniq.sh -j /usr/local/bin
+    ./install_krakenuniq.sh /usr/local/bin
     cd .. || exit 1
     rm -rf krakenuniq krakenuniq.tar.gz
 

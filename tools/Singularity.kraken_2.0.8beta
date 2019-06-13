@@ -3,13 +3,13 @@ From: ubuntu:18.04
 
 %help
 
-    kraken2 2.0.7-beta
+    kraken2 2.0.8-beta
     https://github.com/DerrickWood/kraken2
 
 %labels
 
     MAINTAINER "Tom Harrop"
-    VERSION "kraken2 2.0.7-beta"
+    VERSION "kraken2 2.0.8-beta"
 
 %post
 
@@ -28,7 +28,7 @@ From: ubuntu:18.04
     # install kraken
     wget -O kraken.tar.gz \
         --no-check-certificate \
-        https://github.com/DerrickWood/kraken2/archive/v2.0.7-beta.tar.gz
+        https://github.com/DerrickWood/kraken2/archive/v2.0.8-beta.tar.gz
     mkdir kraken
     tar -zxf kraken.tar.gz \
         -C kraken \

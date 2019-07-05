@@ -4,14 +4,25 @@ From: ubuntu:19.04
 %help
     OptaPlanner 7.23.0
 
+    # add application user
+    cd /wildfly
+
+    bin/add-user.sh
+
+
 singularity run \
     --writable-tmpfs \
     -B test/data:/wildfly/standalone/data,test/log:/wildfly/standalone/log,test/tmp:/wildfly/standalone/tmp \
     optaplanner_7.23.0.sif
 
-    adduser (application)
-
-
+    bin/standalone.sh --server-config=standalone-full.xml \
+        -Dorg.kie.server.user=planner \
+        -Dorg.kie.server.pwd=Planner123_ \
+        -Dorg.kie.server.controller.user=planner \
+        -Dorg.kie.server.controller.pwd=Planner123_ \
+        -Dorg.kie.server.id=wildfly-kieserver \
+        -Dorg.kie.server.location=http://localhost:8080/kie-server/services/rest/server \
+        -Dorg.kie.server.controller=http://localhost:8080/business-central/rest/controller
 
 %labels
     MAINTAINER "Tom Harrop"
@@ -22,6 +33,7 @@ singularity run \
     # xorg?
     apt-get install -y \
         default-jre \
+        unzip \
         wget
 
     # install wildfly
@@ -35,17 +47,43 @@ singularity run \
         --strip-components 1
     rm -r wildfly.tar.gz
 
+    # kie-server
+    mkdir kie-server
+    cd kie-server || exit 1
+    wget -O kie-server.zip \
+        https://download.jboss.org/drools/release/7.23.0.Final/kie-server-distribution-7.23.0.Final.zip 
+    unzip kie-server
+    cp kie-server-controller-standalone-7.23.0.Final-webc.war \
+        ../wildfly/standalone/deployments/kie-server.war
+    cd .. || exit 1
+    rm -rt kie-server
+
     # workbench
     cd wildfly/standalone/deployments || exit 1
-    wget -O workbench.war \
-        https://download.jboss.org/drools/release/7.23.0.Final/business-central-7.23.0.Final-wildfly14.war
+    wget -O business-central.war \
+        https://download.jboss.org/drools/release/7.23.0.Final/business-central-7.23.0.Final-wildfly14.writable-tmpfs
+
+    # add user
+    cd /wildfly
+    bin/add-user.sh -a \
+        --group kie-server,admin \
+        --user planner \
+        --password Planner123_
 
 %environment
     export JAVA_OPTS="-Xms64m -Xmx32g -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true"
 
 %runscript
-
-    exec /wildfly/bin/standalone.sh "$@"
+    exec \
+        /wildfly/bin/standalone.sh --server-config=standalone-full.xml \
+        -Dorg.kie.server.user=planner \
+        -Dorg.kie.server.pwd=Planner123_ \
+        -Dorg.kie.server.controller.user=planner \
+        -Dorg.kie.server.controller.pwd=Planner123_ \
+        -Dorg.kie.server.id=wildfly-kieserver \
+        -Dorg.kie.server.location=http://localhost:8080/kie-server/services/rest/server \
+        -Dorg.kie.server.controller=http://localhost:8080/business-central/rest/controller \
+        "$@"
 
 %startscript
     cd /wildfly/bin &

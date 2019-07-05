@@ -53,7 +53,7 @@ singularity run \
     wget -O kie-server.zip \
         https://download.jboss.org/drools/release/7.23.0.Final/kie-server-distribution-7.23.0.Final.zip 
     unzip kie-server
-    cp kie-server-controller-standalone-7.23.0.Final-webc.war \
+    cp kie-server-7.23.0.Final-ee7.war \
         ../wildfly/standalone/deployments/kie-server.war
     cd .. || exit 1
     rm -rf kie-server kie-server.zip
@@ -61,7 +61,7 @@ singularity run \
     # workbench
     cd wildfly/standalone/deployments || exit 1
     wget -O business-central.war \
-        https://download.jboss.org/drools/release/7.23.0.Final/business-central-7.23.0.Final-wildfly14.writable-tmpfs
+        https://download.jboss.org/drools/release/7.23.0.Final/business-central-7.23.0.Final-wildfly14.war
 
     # add user
     cd /wildfly

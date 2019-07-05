@@ -56,7 +56,7 @@ singularity run \
     cp kie-server-controller-standalone-7.23.0.Final-webc.war \
         ../wildfly/standalone/deployments/kie-server.war
     cd .. || exit 1
-    rm -rt kie-server
+    rm -rf kie-server kie-server.zip
 
     # workbench
     cd wildfly/standalone/deployments || exit 1

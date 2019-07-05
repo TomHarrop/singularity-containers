@@ -1,0 +1,5 @@
+Bootstrap: library
+From: centos:7.6
+
+%post
+# yum install golang-bin gcc-c++

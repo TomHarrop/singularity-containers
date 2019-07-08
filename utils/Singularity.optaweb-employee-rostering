@@ -15,6 +15,12 @@ From: ubuntu:19.04
     # to skip past javadoc errors
     mvn clean install -DskipTests -DargLine="--add-modules java.xml.ws.annotation"
 
+singularity shell \
+    --writable-tmpfs \
+    -B test/data:/wildfly/standalone/data,test/log:/wildfly/standalone/log,test/tmp:/wildfly/standalone/tmp \
+    optaweb-employee-rostering.sif
+
+
 %labels
     MAINTAINER "Tom Harrop"
 
@@ -62,7 +68,9 @@ From: ubuntu:19.04
     exit 0
 
     # deploy war files (which one?) - webapp & gwtui?
-    find . -type f -name "*war" -exec bash -c 'cp {} /wildfly/standalone/deployments/' \;
+    cp \
+        ./employee-rostering-distribution/target/employee-rostering-distribution-7.24.0-SNAPSHOT/employee-rostering-distribution-7.24.0-SNAPSHOT/binaries/employee-rostering-webapp-7.24.0-SNAPSHOT.war \
+        /wildfly/standalone/deployments/   
     # then go to http://127.0.0.1:8080/gwtui/gwtui.html
 
 %environment

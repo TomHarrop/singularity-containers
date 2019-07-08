@@ -15,6 +15,15 @@ singularity run \
     -B test/data:/wildfly/standalone/data,test/log:/wildfly/standalone/log,test/tmp:/wildfly/standalone/tmp \
     optaplanner_7.23.0.sif
 
+
+singularity shell \
+    --writable-tmpfs \
+    -B test/data:/wildfly/standalone/data,test/log:/wildfly/standalone/log,test/tmp:/wildfly/standalone/tmp \
+    optaplanner_7.23.0.sif
+
+
+export JAVA_OPTS="-Xms64m -Xmx32g -XX:MetaspaceSize=1000M -XX:MaxMetaspaceSize=2560m -Djava.net.preferIPv4Stack=true"
+
     bin/standalone.sh --server-config=standalone-full.xml \
         -Dorg.kie.server.user=planner \
         -Dorg.kie.server.pwd=Planner123_ \
@@ -23,6 +32,13 @@ singularity run \
         -Dorg.kie.server.id=wildfly-kieserver \
         -Dorg.kie.server.location=http://localhost:8080/kie-server/services/rest/server \
         -Dorg.kie.server.controller=http://localhost:8080/business-central/rest/controller
+
+# download and build?
+apt install maven git openjdk-8-jre
+git clone https://github.com/kiegroup/optaweb-employee-rostering.git
+mvn clean install -DskipTests
+# to skip past javadoc errors
+mvn clean install -DskipTests -DargLine="--add-modules java.xml.ws.annotation"
 
 %labels
     MAINTAINER "Tom Harrop"

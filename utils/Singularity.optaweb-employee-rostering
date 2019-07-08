@@ -1,0 +1,73 @@
+Bootstrap: docker
+From: ubuntu:19.04
+
+%help
+    https://github.com/kiegroup/optaweb-employee-rostering.git
+
+    # add application user
+    cd /wildfly
+    bin/add-user.sh
+
+    # download and build?
+    apt install maven git openjdk-8-jre
+    git clone https://github.com/kiegroup/optaweb-employee-rostering.git
+    mvn clean install -DskipTests
+    # to skip past javadoc errors
+    mvn clean install -DskipTests -DargLine="--add-modules java.xml.ws.annotation"
+
+%labels
+    MAINTAINER "Tom Harrop"
+
+%post
+    # dependencies
+    apt-get update
+    # xorg?
+    apt-get install -y \
+        git \
+        maven \
+        openjdk-8-jre \
+        unzip \
+        wget
+
+    # install wildfly
+    wget \
+        -O wildfly.tar.gz \
+        --no-check-certificate \
+        https://download.jboss.org/wildfly/17.0.0.Final/wildfly-17.0.0.Final.tar.gz
+    mkdir wildfly
+    tar -zxf wildfly.tar.gz \
+        -C wildfly \
+        --strip-components 1
+    rm -r wildfly.tar.gz
+
+    # add user
+    cd /wildfly
+    bin/add-user.sh -a \
+        --group kie-server,admin \
+        --user planner \
+        --password Planner123_
+
+    # download optaweb-employee-rostering
+    cd /
+    git clone https://github.com/kiegroup/optaweb-employee-rostering.git
+    exit 0
+    mvn clean install -DskipTests
+
+%environment
+    export JAVA_OPTS="-Xms64m -Xmx32g -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true"
+
+%runscript
+    exec \
+        /wildfly/bin/standalone.sh --server-config=standalone-full.xml \
+        -Dorg.kie.server.user=planner \
+        -Dorg.kie.server.pwd=Planner123_ \
+        -Dorg.kie.server.controller.user=planner \
+        -Dorg.kie.server.controller.pwd=Planner123_ \
+        -Dorg.kie.server.id=wildfly-kieserver \
+        -Dorg.kie.server.location=http://localhost:8080/kie-server/services/rest/server \
+        -Dorg.kie.server.controller=http://localhost:8080/business-central/rest/controller \
+        "$@"
+
+%startscript
+    cd /wildfly/bin &
+    nohup ./standalone.sh > /dev/null 2>&1 < /dev/null &

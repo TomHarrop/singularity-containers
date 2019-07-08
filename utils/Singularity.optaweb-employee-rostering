@@ -15,11 +15,10 @@ From: ubuntu:19.04
     # to skip past javadoc errors
     mvn clean install -DskipTests -DargLine="--add-modules java.xml.ws.annotation"
 
-singularity shell \
-    --writable-tmpfs \
-    -B test/data:/wildfly/standalone/data,test/log:/wildfly/standalone/log,test/tmp:/wildfly/standalone/tmp \
-    optaweb-employee-rostering.sif
-
+    singularity shell \
+        --writable-tmpfs \
+        -B test/data:/wildfly/standalone/data,test/log:/wildfly/standalone/log,test/tmp:/wildfly/standalone/tmp \
+        optaweb-employee-rostering.sif
 
 %labels
     MAINTAINER "Tom Harrop"
@@ -64,8 +63,6 @@ singularity shell \
     git clone https://github.com/kiegroup/optaweb-employee-rostering.git
     cd optaweb-employee-rostering || exit 1
     mvn clean install -DskipTests
-    find . -type f -name "*war"
-    exit 0
 
     # deploy war files (which one?) - webapp & gwtui?
     cp \

@@ -25,9 +25,15 @@ From: ubuntu:19.04
     apt-get install -y \
         git \
         maven \
-        openjdk-8-jre \
+        openjdk-8-jdk \
         unzip \
         wget
+
+    # select java 8 but ignore errors
+    export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+    update-java-alternatives \
+        --set java-1.8.0-openjdk-amd64 \
+        || true
 
     # install wildfly
     wget \
@@ -50,7 +56,7 @@ From: ubuntu:19.04
     # download optaweb-employee-rostering
     cd /
     git clone https://github.com/kiegroup/optaweb-employee-rostering.git
-    exit 0
+    cd optaweb-employee-rostering
     mvn clean install -DskipTests
 
 %environment

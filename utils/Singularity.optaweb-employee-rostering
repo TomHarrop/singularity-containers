@@ -20,6 +20,14 @@ From: ubuntu:19.04
         -B test/data:/wildfly/standalone/data,test/log:/wildfly/standalone/log,test/tmp:/wildfly/standalone/tmp \
         optaweb-employee-rostering.sif
 
+    singularity run \
+        --writable-tmpfs \
+        -B test/data:/wildfly/standalone/data,test/log:/wildfly/standalone/log,test/tmp:/wildfly/standalone/tmp \
+        optaweb-employee-rostering.sif
+
+
+/wildfly/bin/standalone.sh --server-config=standalone.xml
+
 %labels
     MAINTAINER "Tom Harrop"
 
@@ -57,6 +65,10 @@ From: ubuntu:19.04
         --group kie-server,admin \
         --user planner \
         --password Planner123_
+    bin/add-user.sh \
+        --group admin \
+        --user admin \
+        --password Admin123_
 
     # download and build optaweb-employee-rostering
     cd /
@@ -71,7 +83,7 @@ From: ubuntu:19.04
     # then go to http://127.0.0.1:8080/gwtui/gwtui.html
 
 %environment
-    export JAVA_OPTS="-Xms64m -Xmx32g -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true"
+    export JAVA_OPTS="-Xms64m -Xmx32g -XX:MetaspaceSize=960M -XX:MaxMetaspaceSize=2560m -Djava.net.preferIPv4Stack=true"
 
 %runscript
     exec \

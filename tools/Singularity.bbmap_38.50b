@@ -1,4 +1,4 @@
-Bootstrap: shub
+Bootstrap: shubcombinelab
 From: TomHarrop/singularity-containers:samtools_1.9
 
 %help

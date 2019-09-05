@@ -2,18 +2,18 @@ Bootstrap: docker
 From: ubuntu:16.04
 
 %help
-    ONT MinKNOW 19.05.0-1 GUI in a container
+    ONT MinKNOW 19.06.8-1 GUI in a container
 
     Run as follows:
 
     singularity instance start \
         -B output/dir/run:/run,output/dir/var:/var \
-        minknow_19.05.0.sif \
+        minknow_19.06.8.sif \
         minknow
 
 %labels
     MAINTAINER "Tom Harrop"
-    VERSION "MinKNOW 19.05.0-1"
+    VERSION "MinKNOW 19.06.8-1"
 
 %post
     # install dependencies
@@ -34,7 +34,7 @@ From: ubuntu:16.04
     echo "deb http://mirror.oxfordnanoportal.com/apt xenial-stable non-free" \
         | tee /etc/apt/sources.list.d/nanoporetech.sources.list
     apt update
-    apt install -y minknow-nc=19.05.0-1~xenial
+    apt install -y minknow-nc=19.06.8-1~xenial
 
 %startscript
     /opt/ONT/MinKNOW/bin/mk_manager_svc &

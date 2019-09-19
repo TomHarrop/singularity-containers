@@ -30,7 +30,10 @@ From: ubuntu:19.04
     #  nvidia driver
     add-apt-repository -y ppa:graphics-drivers/ppa
     apt update
-    apt install -y nvidia-driver-430 nvidia-cuda-dev nvidia-cuda-toolkit
+    apt install -y \
+        nvidia-driver-430 \
+        nvidia-cuda-dev \
+        nvidia-cuda-toolkit
 
     # download racon
     mkdir racon

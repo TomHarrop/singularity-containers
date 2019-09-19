@@ -42,7 +42,7 @@ From: ubuntu:19.04
         --strip-components 1
 
     cd racon || exit 1
-    git submodule update --init --recursive
+    git submodule update --init --recursive || true
     mkdir build && cd build || exit 1
     cmake \
         -DCMAKE_BUILD_TYPE=Release \

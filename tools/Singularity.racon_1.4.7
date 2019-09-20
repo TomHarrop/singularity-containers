@@ -43,6 +43,7 @@ From: ubuntu:19.04
     tar -zxf racon.tar.gz \
         -C racon \
         --strip-components 1
+    rm racon.tar.gz
 
     # build and install with cuda support
     cd racon || exit 1
@@ -56,8 +57,7 @@ From: ubuntu:19.04
         -Dracon_enable_cuda=ON \
         ..
     make && make install
-    cd ../.. || exit 1
-    rm racon.tar.gz
+
 
 %runscript
     exec /racon/build/bin/racon "$@"

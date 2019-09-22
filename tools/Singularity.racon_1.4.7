@@ -16,25 +16,23 @@ From: ubuntu:19.04
     apt-get clean
     apt-get update
     apt-get install -y \
+        apt-transport-https \
         build-essential \
         cmake \
         git \
         language-pack-en \
         lsb-release \
+        nvidia-modprobe \
         python \
-        wget 
-
-        # apt-transport-https \
-        # nvidia-modprobe \
-        # software-properties-common \
+        software-properties-common \
+        wget
 
     #  nvidia driver
-    # add-apt-repository -y ppa:graphics-drivers/ppa
-    # apt update
-    # apt install -y \
-    #     nvidia-driver-430 \
-    #     nvidia-cuda-dev \
-    #     nvidia-cuda-toolkit
+    add-apt-repository -y ppa:graphics-drivers/ppa
+    apt update
+    apt install -y \
+        nvidia-driver-430 \
+        nvidia-cuda-toolkit
 
     # download racon
     mkdir racon
@@ -54,13 +52,10 @@ From: ubuntu:19.04
         -DCMAKE_BUILD_TYPE=Release \
         -Dracon_build_tests=ON \
         -Dracon_build_wrapper=ON \
+        -D CUDA_TOOLKIT_ROOT_DIR=/usr/lib/cuda \
+        -Dracon_enable_cuda=ON \
         ..
     make && make install
-
-        # -D CUDA_TOOLKIT_ROOT_DIR=/usr/lib/cuda \
-        # -Dracon_enable_cuda=ON \
-
-
 
 %runscript
     exec /racon/build/bin/racon "$@"

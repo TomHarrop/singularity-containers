@@ -1,0 +1,53 @@
+FROM ubuntu:19.04
+
+# docker build -f Dockerfile.racon_1.4.7 -t vanessa/racon:1.4.7 .
+# docker push vanessa/racon:1.4.7
+# singularity pull docker://vanessa/racon:1.4.7
+
+LABEL SOFTWARE_NAME Racon v1.4.7
+LABEL SOFTWARE_URL https://github.com/isovic/racon
+LABEL MAINTAINER "Tom Harrop"
+LABEL VERSION "Racon v1.4.7"
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && \
+    apt-get install -y \
+        apt-transport-https \
+        build-essential \
+        cmake \
+        git \
+        language-pack-en \
+        lsb-release \
+        nvidia-modprobe \
+        python \
+        software-properties-common \
+        wget
+
+RUN add-apt-repository -y ppa:graphics-drivers/ppa && \
+    apt update && \
+    apt install -y \
+        nvidia-driver-430 \
+        nvidia-cuda-toolkit
+
+WORKDIR /racon
+RUN wget -O "racon.tar.gz" \
+        --no-check-certificate \
+        https://github.com/lbcb-sci/racon/releases/download/1.4.7/racon-v1.4.7.tar.gz
+RUN tar -zxf racon.tar.gz \
+        --strip-components 1 && \
+    rm racon.tar.gz
+
+# build and install with cuda support
+RUN git submodule update --init --recursive || true     # have to allow fail
+RUN mkdir build && cd build || exit 1 && \
+    cmake \
+        -DCMAKE_BUILD_TYPE=Release \
+        -Dracon_build_tests=ON \
+        -Dracon_build_wrapper=ON \
+        -D CUDA_TOOLKIT_ROOT_DIR=/usr/lib/cuda \
+        -Dracon_enable_cuda=ON \
+        .. && \
+    make && make install
+
+ENV PATH="${PATH}:/racon/build/bin"
+ENTRYPOINT ["/racon/build/bin/racon"]

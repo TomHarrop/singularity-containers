@@ -2,12 +2,12 @@ Bootstrap: docker
 From: tensorflow/tensorflow:1.14.0-gpu-py3
 
 %help
-    medaka 0.10.0
+    medaka 7574cf1
     https://github.com/nanoporetech/medaka
 
 %labels
     MAINTAINER "Tom Harrop"
-    VERSION "medaka 0.10.0"
+    VERSION "medaka 7574cf1"
 
 %post
     export DEBIAN_FRONTEND=noninteractive
@@ -44,7 +44,7 @@ _EOF_
     # medaka gpu
     git lfs clone https://github.com/nanoporetech/medaka.git
     cd medaka || exit 1
-    git checkout v0.10.0
+    git checkout 7574cf1
     sed -i 's/tensorflow/tensorflow-gpu/' requirements.txt
     make install # this builds the binaries in bincache and installs into venv
 
